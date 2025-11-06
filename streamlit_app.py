@@ -74,6 +74,11 @@ CONTENT_BY_LABEL: dict[str, dict[str, list[str]]] = {
     #   "images": ["https://.../jjampong1.jpg", "https://.../jjampong2.jpg"],
     #   "videos": ["https://youtu.be/XXXXXXXXXXX"]
     # },
+     labels[0]: {
+       "texts": ["일본미녀는", "일본의", "미녀입니다."],
+       "images": ["https://mblogthumb-phinf.pstatic.net/MjAyNDEwMjRfMTI0/MDAxNzI5NzY1ODExNzcz.3cGjxG0Q45yk1IRZuYUdxeZO1jPgZHM5AqqZtJWbovMg.nufI8kFvTyOCW235I2U9dFD_LuPZqvfQ__mH48Q5K94g.JPEG/KD%EF%BC%BF01%EF%BC%8D638.jpg?type=w800"],
+       "videos": ["https://www.youtube.com/watch?v=gW4i9cNOOWY"]
+     },
 }
 
 # ======================
