@@ -79,6 +79,69 @@ CONTENT_BY_LABEL: dict[str, dict[str, list[str]]] = {
        "images": ["https://mblogthumb-phinf.pstatic.net/MjAyNDEwMjRfMTI0/MDAxNzI5NzY1ODExNzcz.3cGjxG0Q45yk1IRZuYUdxeZO1jPgZHM5AqqZtJWbovMg.nufI8kFvTyOCW235I2U9dFD_LuPZqvfQ__mH48Q5K94g.JPEG/KD%EF%BC%BF01%EF%BC%8D638.jpg?type=w800"],
        "videos": ["https://www.youtube.com/watch?v=gW4i9cNOOWY"]
      },
+
+     labels[1]: {
+       "texts": ["중국미녀는", "중국의", "미녀입니다."],
+       "images": ["https://mblogthumb-phinf.pstatic.net/MjAyNDEwMjRfMTI0/MDAxNzI5NzY1ODExNzcz.3cGjxG0Q45yk1IRZuYUdxeZO1jPgZHM5AqqZtJWbovMg.nufI8kFvTyOCW235I2U9dFD_LuPZqvfQ__mH48Q5K94g.JPEG/KD%EF%BC%BF01%EF%BC%8D638.jpg?type=w800"],
+       "videos": ["https://www.youtube.com/watch?v=gW4i9cNOOWY"]
+     },
+
+     labels[2]: {
+       "texts": ["한국미녀는", "한국f "img_bytes" not in st.session_state:
+    st.session_state.img_bytes = None
+if "last_prediction" not in st.session_state:
+    st.session_state.last_prediction = None
+
+# ======================
+# 모델 로드
+# ======================
+FILE_ID = st.secrets.get("GDRIVE_FILE_ID", "11yb2dkq2dc5DB2NzDEiwkUAVT4wHm7JM")
+MODEL_PATH = st.secrets.get("MODEL_PATH", "model.pkl")
+
+@st.cache_resource
+def load_model_from_drive(file_id: str, output_path: str):
+    if not os.path.exists(output_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, output_path, quiet=False)
+    return load_learner(output_path, cpu=True)
+
+with st.spinner("🤖 모델 로드 중..."):
+    learner = load_model_from_drive(FILE_ID, MODEL_PATH)
+st.success("✅ 모델 로드 완료")
+
+labels = [str(x) for x in learner.dls.vocab]
+st.write(f"**분류 가능한 항목:** `{', '.join(labels)}`")
+st.markdown("---")
+
+# ======================
+# 라벨 이름 매핑: 여기를 채우세요!
+# 각 라벨당 최대 3개씩 표시됩니다.
+# ======================
+CONTENT_BY_LABEL: dict[str, dict[str, list[str]]] = {
+    # 예)
+    # "짬뽕": {
+    #   "texts": ["짬뽕의 특징과 유래", "국물 맛 포인트", "지역별 스타일 차이"],
+    #   "images": ["https://.../jjampong1.jpg", "https://.../jjampong2.jpg"],
+    #   "videos": ["https://youtu.be/XXXXXXXXXXX"]
+    # },
+     labels[0]: {
+       "texts": ["일본미녀는", "일본의", "미녀입니다."],
+       "images": ["https://mblogthumb-phinf.pstatic.net/MjAyNDEwMjRfMTI0/MDAxNzI5NzY1ODExNzcz.3cGjxG0Q45yk1IRZuYUdxeZO1jPgZHM5AqqZtJWbovMg.nufI8kFvTyOCW235I2U9dFD_LuPZqvfQ__mH48Q5K94g.JPEG/KD%EF%BC%BF01%EF%BC%8D638.jpg?type=w800"],
+       "videos": ["https://www.youtube.com/watch?v=gW4i9cNOOWY"]
+     },
+
+     labels[1]: {
+       "texts": ["중국미녀는", "중국의", "미녀입니다."],
+       "images": ["https://mblogthumb-phinf.pstatic.net/MjAyMDA1MjdfMTM5/MDAxNTkwNTU4Mjk1MTQ3._rqyDlNP1YhgAoG2EsBvpPC7gjYh7NyFG79jIuzAArAg.bZZ4vBk1lpALdFfNNNuawZ8SWjs7xr8_6qbfSP8DsR8g.PNG.jangsihyun/15.PNG?type=w800"],
+       "videos": ["https://www.youtube.com/watch?v=pY_7RW6s8-0"]
+     },
+
+     labels[2]: {
+       "texts": ["한국미녀는", "한국의", "미녀입니다."],
+       "images": ["https://img2.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202310/06/newsayspoenter/20231006105817609urdt.png"],
+       "videos": ["https://www.youtube.com/watch?v=Pf3DRoqtRqQ"]
+     },
+    
 }
 
 # ======================
